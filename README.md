@@ -87,4 +87,12 @@ Gráfico resultado de las líneas de código anteriores
 Las funciones `corinp` e `inp.lm` permite ver la relación entre los dos sets de variables, permitiendo además escoger el método por el cual se obtendrán los datos.
 
 >corinp <- cor(inp[,2:3], method= "spearman")  
->inp.lm <- lm (inp[,2] ~ inp[,3], data=inp)
+>inp.lm <- lm (inp[,2] ~ inp[,3], data=inp)  
+>summary(inp.lm)  
+>plot(inp.lm)
+
+![Comparación de los MAQ de Río Banano y Río Estrella](Residuals-fitted-MAQ.png)  
+![Comparación de los MAQ de Río Banano y Río Estrella](Normal-Q-Q-MAQ.png)  
+![Comparación de los MAQ de Río Banano y Río Estrella](Residuals-fitted-MAQ.png)  
+![Comparación de los MAQ de Río Banano y Río Estrella](Residuals-v-Leverage-MAQ.png)  
+Gráficos resultado de la función`plot(inp.lm)`
