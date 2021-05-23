@@ -19,3 +19,9 @@ Es importante asegurarse fijar el _"working directory"_ en el folder donde se en
 >lines(inp[,3],col="green")  
 >legend(1, 140, legend=c("Río Estrella", "Río Banano"),   
 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; col=c("blue","green"),lty=1:1, cex=0.8)
+
+![Gráfico resultado de las líneas de código anteriores](comparacion-datos-rios-csv.png)  
+Gráfico resultado de las líneas de código anteriores
+
+### Resumen de las variables e histogramas de estas.
+
