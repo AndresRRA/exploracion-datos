@@ -61,6 +61,30 @@ Gracias al lenguaje R, muchos cálculos de datos se pueden hacer de forma inmedi
 
 ## Creando nuevos dataframes.
 
+La función `write.csv` permite crear nuevos archivos CSV a partir de `values` que uno haya establecido previamente, tal como lo es en este caso MAQ_Estrella y MAQ_Banano. En este caso se creó un único archivo CSV con ambos `values`.
 
+>write.csv(rbind(MAQ_Estrella, MAQ_Banano), file= "MAQ.csv")
 
+### Comparando los MAQ por medio de un gráfico.
 
+>plot(MAQ_Banano, ylim = c(100,4000),type = "l", col="black",   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main= 'Comparación de los MAQ de Río Estrella y Río Banano',   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xlab = 'Año', ylab= 'Valor')  
+>lines(MAQ_Estrella, col="Red")  
+>legend(8, 3900, legend=c("Río Banano", "Río Estrella"),   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; col=c("black","red"),lty=1:1, cex=0.8) 
+
+![Comparación de los MAQ de Río Banano y Río Estrella](Comparacion-MAQ.png)  
+Gráfico resultado de las líneas de código anteriores
+
+### Calculando el mean monthly streamflow (MMQ).
+
+>MMQ_Estrella <- tapply(inp[,2], format(Tempdate, format= "%m"), FUN=sum)  
+>MMQ_Banano <- tapply(inp[,3], format(Tempdate, format= "%m"), FUN=sum)
+
+## Análisis de correlación.
+
+Las funciones `corinp` e `inp.lm` permite ver la relación entre los dos sets de variables, permitiendo además escoger el método por el cual se obtendrán los datos.
+
+>corinp <- cor(inp[,2:3], method= "spearman")  
+>inp.lm <- lm (inp[,2] ~ inp[,3], data=inp)
