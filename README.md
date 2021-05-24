@@ -96,3 +96,65 @@ Las funciones `corinp` e `inp.lm` permite ver la relación entre los dos sets de
 ![Comparación de los MAQ de Río Banano y Río Estrella](Residuals-fitted-MAQ.png)  
 ![Comparación de los MAQ de Río Banano y Río Estrella](Residuals-v-Leverage-MAQ.png)  
 Gráficos resultado de la función`plot(inp.lm)`
+
+## Código final.
+
+>#Datos hidrológicos ejercicio explorativo  
+>
+>#Cargando los datos del archivo csv en la memoria     
+>inp <- read.csv("FDC.csv", na.strings="")  
+>
+>head(inp)   
+>dim(inp)  
+>  
+>inp[!complete.cases(inp),]    
+>
+>#Graficando la comparación entre los datos de las dos columnas    
+>
+>plot(inp[,2], type = "l", col="blue",    
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main= 'Comparación de datos entre Río Estrella y Río Banano',      
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xlab = 'Fecha', ylab = 'Datos')    
+>lines(inp[,3],col="green")   
+>legend(1, 140, legend=c("Río Estrella", "Río Banano"),    
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; col=c("blue","green"),lty=1:1, cex=0.8)  
+>
+>#Resumen de las variables e histogramas  
+>summary(inp[,2:3])  
+>hist(inp[,2], main =   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Histograma datos Río Estrella')  
+>hist(inp[,3], main =   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Histograma datos Río Banano')  
+>
+>#Nombrando las columnas  
+>names(inp) <- c("fecha", "Estrella", "Banano")  
+>attach(inp)  
+>plot(Estrella)  
+>
+>#Agregando el valor de fecha a la columna 1  
+>Tempdate <- strptime(inp[,1], format= "%d/%m/%Y")  
+>
+>#Calculando el mean annual streamflow (MAQ)   
+>MAQ_Estrella <- tapply(inp[,2], format(Tempdate, format= "%Y"), FUN=sum)  
+>MAQ_Banano <- tapply(inp[,3], format(Tempdate, format= "%Y"), FUN=sum)  
+>
+>#Comparando MAQs  
+>plot(MAQ_Banano, ylim = c(100,4000),type = "l", col="black",   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main= 'Comparación de los MAQ de Río Estrella y Río Banano',   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xlab = 'Año', ylab= 'Valor')  
+>lines(MAQ_Estrella, col="Red")  
+>legend(8, 3900, legend=c("Río Banano", "Río Estrella"),   
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;col=c("black","red"),lty=1:1, cex=0.8)  
+>
+>#Creando nuevos dataframes   
+>write.csv(rbind(MAQ_Estrella, MAQ_Banano), file= "MAQ.csv")  
+>
+>#Calculando el mean monthly streamflow (MMQ)  
+>MMQ_Estrella <- tapply(inp[,2], format(Tempdate, format= "%m"), FUN=sum)  
+>MMQ_Banano <- tapply(inp[,3], format(Tempdate, format= "%m"), FUN=sum)  
+>
+>#Analisis de correlación  
+>corinp <- cor(inp[,2:3], method= "spearman")  
+>
+>inp.lm <- lm (inp[,2] ~ inp[,3], data=inp)  
+>summary(inp.lm)  
+>plot(inp.lm, main = 'Análisis de correlación',)  
