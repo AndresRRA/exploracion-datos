@@ -172,7 +172,7 @@ pre code {
 
 <div id="cargando-los-datos-del-archivo-csv-dentro-de-rstudio." class="section level2">
 <h2>Cargando los datos del archivo CSV dentro de RStudio.</h2>
-<p>Es importante asegurarse fijar el “working directory” en el folder donde se encuentre el archivo CSV, ya que si no el programa RStudio no puede hallar el archivo. Esto se logra mediante la función setwd(“C:/Users/[[nombre del usuario]]/[[dirección que de directamente al folder donde se encuentra el archivo]”). La función head(inp) le ayuda a uno a verificar que se escogió el archivo correcto mostrando el comienzo de dicho documento; la función dim(inp) le da a uno las dimensiones del documento, en este caso siendo 3845 líneas y 3 columnas.</p>
+<p>Es importante asegurarse fijar el “working directory” en el folder donde se encuentre el archivo CSV, ya que si no el programa RStudio no puede hallar el archivo. Esto se logra mediante la función <code>setwd(&quot;C:/Users/[[nombre del usuario]]/[[dirección que de directamente al folder donde se encuentra el archivo]&quot;)</code>. La función <code>head(inp)</code> le ayuda a uno a verificar que se escogió el archivo correcto mostrando el comienzo de dicho documento; la función <code>dim(inp)</code> le da a uno las dimensiones del documento, en este caso siendo 3845 líneas y 3 columnas.</p>
 <pre class="r"><code>inp &lt;- read.csv(&quot;FDC.csv&quot;, na.strings=&quot;&quot;)  
 head(inp)</code></pre>
 <pre><code>##      Tiempo Pandora.mm..637km2. Banano.mm..90km2.
